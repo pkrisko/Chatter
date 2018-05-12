@@ -17,24 +17,24 @@
         <div class="row">
                 <div class="input-field col s12">
                     <label for="name1">First name</label>
-                    <input type="text" class="validate" name="email" id="email" [(ngModel)]="user.firstName"/>
+                    <input type="text" class="validate" name="firstName" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}"/>
                  </div>
                 <div class="input-field col s12">
                     <label for="name2">Last name</label>
-                    <input type="text" class="validate" name="email" id="email" [(ngModel)]="user.lastName"/>
+                    <input type="text" class="validate"[(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}"/>
                   </div>
           
           <div class="input-field col s12">
             <label for="email">Email</label>
-            <input type="email" class="validate" name="email" id="email" [(ngModel)]="user.email"/>
+            <input type="email" class="validate" id="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"/>
           </div>
           <div class="input-field col s12">
             <label for="password">Password </label>
-            <input type="password" class="validate" name="password" id="password" [(ngModel)]="passwords.pw"/>
+            <input type="password" class="validate" id="password1" [(ngModel)]="passwords.pw" [ngModelOptions]="{standalone: true}"/>
           </div>
           <div class="input-field col s12">
               <label for="password">Confirm Password </label>
-              <input type="password" class="validate" name="password" id="password" [(ngModel)]="passwords.pwc"/>
+              <input type="password" class="validate" id="password2" [(ngModel)]="passwords.pwc" [ngModelOptions]="{standalone: true}"/>
             </div>
         </div>
       </div>

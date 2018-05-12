@@ -5,5 +5,8 @@ export class User {
         public lastName:string = "",
         public email:string = "",
         public password:string = "",
+        public admin:boolean = false,
+        public createdAt:string = "",
+        public updatedAt:string = "",
     ) {}
 }
