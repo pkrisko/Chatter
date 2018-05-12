@@ -1,3 +1,48 @@
-<p>
-  login-reg works!
-</p>
+
+<div class= "spacing"></div>
+<div class="valign-wrapper row login-box">
+  
+  <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+      <nav>
+          <div class="nav-wrapper teal lighten-2">
+            <ul id="nav-mobile" class="left">
+              <li><a href="/login">Login</a></li>
+              <li><a href="/reg">Register</a></li>
+            </ul>
+          </div>
+        </nav>
+    <form (submit)="login()">
+      <div class="card-content">
+        <span class="card-title">New Chatters</span>
+        <div class="row">
+                <div class="input-field col s12">
+                    <label for="name1">First name</label>
+                    <input type="text" class="validate" name="email" id="email" [(ngModel)]="user.firstName"/>
+                 </div>
+                <div class="input-field col s12">
+                    <label for="name2">Last name</label>
+                    <input type="text" class="validate" name="email" id="email" [(ngModel)]="user.lastName"/>
+                  </div>
+          
+          <div class="input-field col s12">
+            <label for="email">Email</label>
+            <input type="email" class="validate" name="email" id="email" [(ngModel)]="user.email"/>
+          </div>
+          <div class="input-field col s12">
+            <label for="password">Password </label>
+            <input type="password" class="validate" name="password" id="password" [(ngModel)]="passwords.pw"/>
+          </div>
+          <div class="input-field col s12">
+              <label for="password">Confirm Password </label>
+              <input type="password" class="validate" name="password" id="password" [(ngModel)]="passwords.pwc"/>
+            </div>
+        </div>
+      </div>
+      <div class="card-action right-align">
+        <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
+        <input type="submit" class="btn teal lighten-2 waves-effect waves-light" value="Login">
+      </div>
+    </form>
+  </div>
+
+</div>

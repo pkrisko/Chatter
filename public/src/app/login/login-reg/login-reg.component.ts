@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../user/user';
 
 @Component({
   selector: 'app-login-reg',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
+  user : User;
+  passwords : Object;
 
   constructor() { }
 
   ngOnInit() {
+    this.user = new User;
+    this.passwords = {
+      pw : "",
+      pwc : "",
+    }
   }
 
 }

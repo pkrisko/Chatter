@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   </div>
   `,
 })
-export class PageNotFoundComponent {}
 
+export class PageNotFoundComponent {}

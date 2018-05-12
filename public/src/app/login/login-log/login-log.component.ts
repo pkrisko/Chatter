@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login-log',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginLogComponent implements OnInit {
 
-  constructor() { }
+  user = {
+    email: "",
+    password: "",
+  };
+  errors = new Array<Object>();
+
+  constructor(
+
+  ) { }
 
   ngOnInit() {
+    // this.user = new User();
+    console.log(this.user);
   }
 
 }
