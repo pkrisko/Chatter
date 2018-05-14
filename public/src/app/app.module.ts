@@ -22,7 +22,6 @@ import { PageNotFoundComponent} from './not-found.component';
 import { UserService } from './services/user.service';
 import { ChatService } from './services/chat.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,8 +33,6 @@ import { ChatService } from './services/chat.service';
     UserListComponent,
     UserDetailsComponent,
     PageNotFoundComponent,
-
-
     LoginLogComponent,
     LoginRegComponent
   ],

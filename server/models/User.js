@@ -5,20 +5,20 @@ mongoose.model("User", new mongoose.Schema(
     {
         firstName : {
             type : String,
-            required : true,
-            minlength : [2, "First name must be more than 2 characters"],
+            required : [true, "First name is required!"],
+            minlength : [2, "First name must be more than 1 characters"],
             maxlength : [64, "First name must be less than 64 characters"]
         }, 
         lastName :  {
             type : String,
-            required : true,
-            minlength : [2, "Last name must be more than 2 characters"],
+            required : [true, "Last name is required!"],
+            minlength : [2, "Last name must be more than 1 characters"],
             maxlength : [64, "Last name must be less than 64 characters"]
         }, 
         email :  {
             type : String,
-            required  :  true, 
-            minlength  :  [6, "Email must be more than 6 characters"],
+            required  :  [true, "Email is required!"], 
+            minlength  :  [6, "Email must be more than 5 characters"],
             maxlength  :  [128, "Last name must be less than 128 characters"], 
             validate  :  {
                 validator : function(value) { // Simple email regex.  Shortest match would be a@b.co
@@ -30,13 +30,13 @@ mongoose.model("User", new mongoose.Schema(
         password :  {
             type :  String,
             required: true,
-            minlength: 8,
-            validate: {
-                validator: function( value ) { // Password regex.  Description provided in message.
-                    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value);
-                },
-                message: "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number,and one special character ( ! @ $ % ^ & * )"
-            }
+            minlength: [4, "Password must be more than 7 characters"],
+            // validate: {
+            //     validator: function( value ) { // Password regex.  Description provided in message.
+            //         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value);
+            //     },
+            //     message: "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number,and one special character ( ! @ $ % ^ & * )"
+            // }
         }, 
         admin: {
             type:Boolean,

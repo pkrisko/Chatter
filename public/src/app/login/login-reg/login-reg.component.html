@@ -14,6 +14,12 @@
     <form (submit)="register()">
       <div class="card-content">
         <span class="card-title">New Chatters</span>
+        <div class="row" *ngIf="errors">
+          <ul>
+
+            <li *ngFor="let error of errors">{{error}}</li>
+          </ul>
+        </div>
         <div class="row">
                 <div class="input-field col s12">
                     <label for="name1">First name</label>

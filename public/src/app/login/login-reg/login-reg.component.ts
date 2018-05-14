@@ -8,15 +8,19 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./login-reg.component.css']
 })
 export class LoginRegComponent implements OnInit {
+  // Hold all necessary fields to insert into NoSQL DB
   user : User;
+  // Hold both passwords to check later if they match
   passwords : Object;
+  errors : Array<String>;
 
   constructor(
-    _userService : UserService
+    private _userService : UserService
   ) { }
 
   ngOnInit() {
     this.user = new User;
+    this.errors = new Array<String>();
     this.passwords = {
       pw : "",
       pwc : "",
@@ -24,8 +28,20 @@ export class LoginRegComponent implements OnInit {
   }
 
   register() {
-    console.log(this.user);
-    console.log(this.passwords);
+    this._userService.register({"user" : this.user, "passwords":this.passwords}, (status => {
+      if (status.errors) {
+        console.log("ERRORS");
+        for (var error in status.errors) {
+          this.errors.push(status.errors[error].message);
+        }
+        console.log(this.errors);
+      } else {
+        console.log("SUCCESS BOI");
+        console.log(status);
+        // this.user = new User();
+      }
+    }));
   }
 
 }
+// t
