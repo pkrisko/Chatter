@@ -9,23 +9,35 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginLogComponent implements OnInit {
 
-  user = {
-    email: "",
-    password: "",
-  };
-  errors = new Array<Object>();
+  private user : Object;
+  private errors : Array<String>;
 
   constructor(
-    _userService : UserService
+    private _userService : UserService
   ) { }
 
   ngOnInit() {
-    // this.user = new User();
-    console.log(this.user);
+    this.errors = new Array<String>();
+    this.user = {
+      email: "",
+      password: "",
+    };
   }
 
   login() {
-    console.log(this.user);
+    // Pass form data to userService, to attempt login.
+    this._userService.login(this.user, (status=>{
+      if (status.errors) {
+        console.log("ERRORS");
+        // If there are errors, add to errors array to view on page.
+        for (var error in status.errors) {
+          this.errors.push(status.errors[error].message);
+        }
+        console.log(this.errors);
+      } else { // success
+        console.log(status);
+      }
+    }));
   }
 
 }

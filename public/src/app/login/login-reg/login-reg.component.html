@@ -16,31 +16,79 @@
         <span class="card-title">New Chatters</span>
         <div class="row" *ngIf="errors">
           <ul>
-
             <li *ngFor="let error of errors">{{error}}</li>
           </ul>
         </div>
         <div class="row">
-                <div class="input-field col s12">
-                    <label for="name1">First name</label>
-                    <input type="text" class="validate" name="firstName" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}"/>
-                 </div>
-                <div class="input-field col s12">
-                    <label for="name2">Last name</label>
-                    <input type="text" class="validate"[(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}"/>
-                  </div>
-          
+          <!-- First Name -->
+          <div class="input-field col s12">
+            <label for="name1">First name</label>
+            <input type="text" class="validate" name="firstName" autocomplete="cc-given-name" [(ngModel)]="user.firstName"
+            required minlength="2" #firstName="ngModel"/>
+            <div *ngIf="firstName.invalid && firstName.dirty && firstName.touched" class="alert alert-danger">
+              <div *ngIf="firstName.errors.required">
+                First name is required.
+              </div>
+              <div *ngIf="firstName.errors.minlength">
+                First name must be at least 2 characters long.
+              </div>
+            </div>
+          </div>
+          <!-- Last Name -->
+          <div class="input-field col s12">
+            <label for="name2">Last name</label>
+            <input type="text" class="validate" name="lastName"  autocomplete="cc-family-name" [(ngModel)]="user.lastName"
+            required minlength="2" #lastName="ngModel"/>
+            <div *ngIf="lastName.invalid && lastName.dirty && lastName.touched" class="alert alert-danger">
+              <div *ngIf="lastName.errors.required">
+                Last name is required.
+              </div>
+              <div *ngIf="lastName.errors.minlength">
+                Last name must be at least 2 characters long.
+              </div>
+            </div>
+          </div> 
+          <!-- Email -->
           <div class="input-field col s12">
             <label for="email">Email</label>
-            <input type="email" class="validate" id="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}"/>
+            <input type="email" class="validate" name="email" autocomplete="email" [(ngModel)]="user.email"
+            required minlength="6" #email="ngModel"/>
+            <div *ngIf="email.invalid && email.dirty && email.touched" class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                Email is required.
+              </div>
+              <div *ngIf="email.errors.minlength">
+                Email must be at least 6 characters long.
+              </div>
+            </div>
           </div>
+          <!-- Password 1 -->
           <div class="input-field col s12">
             <label for="password">Password </label>
-            <input type="password" class="validate" id="password1" [(ngModel)]="passwords.pw" [ngModelOptions]="{standalone: true}"/>
+            <input type="password" class="validate" name="password1" [(ngModel)]="passwords.pw" autocomplete="off"
+            required minlength="8" #password1="ngModel"/>
+            <div *ngIf="password1.invalid && password1.dirty && password1.touched" class="alert alert-danger">
+              <div *ngIf="password1.errors.required">
+                Password is required.
+              </div>
+              <div *ngIf="password1.errors.minlength">
+                Password must be at least 8 characters long.
+              </div>
+            </div>
           </div>
+          <!-- Password 2 -->
           <div class="input-field col s12">
               <label for="password">Confirm Password </label>
-              <input type="password" class="validate" id="password2" [(ngModel)]="passwords.pwc" [ngModelOptions]="{standalone: true}"/>
+              <input type="password" class="validate" name="password2" [(ngModel)]="passwords.pwc" autocomplete="off"
+              required minlength="8" #password2="ngModel"/>
+              <div *ngIf="password2.invalid && password2.dirty && password2.touched" class="alert alert-danger">
+                <div *ngIf="password2.errors.required">
+                  Password is required.
+                </div>
+                <div *ngIf="password2.errors.minlength">
+                  Password must be at least 8 characters long.
+                </div>
+              </div>
             </div>
         </div>
       </div>

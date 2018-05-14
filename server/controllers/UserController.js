@@ -41,18 +41,19 @@ class UserController{
     }
 
     login(req, res) {
+
         User.findOne({email: req.body.email},(err,user)=>{
-            if(err) {
+            if(err || user === null) {
                 return res.json({errors:{email:{message:"Email not found. Try registry instead."}}});
             }
             else {
-                bcrypt.compare(req.body.user.password, user.password, function(err, result) {
-                    if(err) {
+                bcrypt.compare(req.body.password, user.password, function(err, result) {
+                    if(!result) {
                         return res.json({errors:{password:{message:"Incorrect password"}}});
                     }
                     else {
                         req.session.userId = user._id;
-                        return res.json(true);
+                        return res.json(user);
                     }
                 })
             }
