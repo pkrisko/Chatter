@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-log',
@@ -15,11 +16,15 @@ export class LoginLogComponent implements OnInit {
   errors = new Array<Object>();
 
   constructor(
-
+    _userService : UserService
   ) { }
 
   ngOnInit() {
     // this.user = new User();
+    console.log(this.user);
+  }
+
+  login() {
     console.log(this.user);
   }
 

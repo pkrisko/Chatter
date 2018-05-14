@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../user/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-reg',
@@ -10,7 +11,9 @@ export class LoginRegComponent implements OnInit {
   user : User;
   passwords : Object;
 
-  constructor() { }
+  constructor(
+    _userService : UserService
+  ) { }
 
   ngOnInit() {
     this.user = new User;
@@ -18,6 +21,11 @@ export class LoginRegComponent implements OnInit {
       pw : "",
       pwc : "",
     }
+  }
+
+  register() {
+    console.log(this.user);
+    console.log(this.passwords);
   }
 
 }
