@@ -3,6 +3,7 @@
 <div class="valign-wrapper row login-box">
   
   <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+      <!-- Nav  -->
       <nav>
           <div class="nav-wrapper teal lighten-2">
             <ul id="nav-mobile" class="left">
@@ -11,6 +12,7 @@
             </ul>
           </div>
         </nav>
+    <!-- Registration form, calls register() component -->
     <form (submit)="register()">
       <div class="card-content">
         <span class="card-title">New Chatters</span>
@@ -94,9 +96,8 @@
       </div>
       <div class="card-action right-align">
         <input type="reset" id="reset" class="btn-flat grey-text waves-effect">
-        <input type="submit" class="btn teal lighten-2 waves-effect waves-light" value="Login">
+        <input type="submit" class="btn teal lighten-2 waves-effect waves-light" value="Register">
       </div>
     </form>
   </div>
-
 </div>

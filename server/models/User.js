@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
 let ObjectId = mongoose.Schema.Types.ObjectId;
+let jwt = require('jsonwebtoken');
 
-mongoose.model("User", new mongoose.Schema(
+var userSchema = new mongoose.Schema(
     {
         firstName : {
             type : String,
@@ -17,12 +18,13 @@ mongoose.model("User", new mongoose.Schema(
         }, 
         email :  {
             type : String,
+            unique : true,
             required  :  [true, "Email is required!"], 
             minlength  :  [6, "Email must be more than 5 characters"],
             maxlength  :  [128, "Last name must be less than 128 characters"], 
             validate  :  {
-                validator : function(value) { // Simple email regex.  Shortest match would be a@b.co
-                    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+                validator : function(v) { // Simple email regex.  Shortest match would be a@b.co
+                    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v);
                 },
                 message : "Invalid email!"
             }
@@ -30,18 +32,32 @@ mongoose.model("User", new mongoose.Schema(
         password :  {
             type :  String,
             required: true,
-            minlength: [4, "Password must be more than 7 characters"],
-            // validate: {
-            //     validator: function( value ) { // Password regex.  Description provided in message.
-            //         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(value);
-            //     },
-            //     message: "Password must contain at least 1 lowercase letter, 1 uppercase letter, 1 number,and one special character ( ! @ $ % ^ & * )"
-            // }
+            minlength: [8, "Password must be more than 7 characters"]
         }, 
         admin: {
             type:Boolean,
             default:false,
             required:true
         },
-    }, { timestamps : true } // Ensure that timestamps are created.  Default names createdAt and updatedAt are used.
-));
+    }, 
+    { 
+        timestamps : true // Ensure that timestamps are created.  Default names createdAt and updatedAt are used.
+    } 
+)
+
+// Add a generateJwt method for each user JSON instance. Used to keep passwords
+// out of token information stored. Tokens expire after "exp", set here to one week.
+userSchema.methods.generateJwt = function() {
+    let expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+    return jwt.sign({
+        _id: this._id,
+        email : this.email,
+        firstName : this.firstName,
+        exp : parseInt(expiry.getTime() / 1000),
+    }, "Pen#Ic1HaU_Gq~,2^Z*&-$|e<.M]"); // Secret
+};
+
+
+
+mongoose.model("User", userSchema);

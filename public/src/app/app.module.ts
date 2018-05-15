@@ -21,6 +21,7 @@ import { PageNotFoundComponent} from './not-found.component';
 // Services
 import { UserService } from './services/user.service';
 import { ChatService } from './services/chat.service';
+import { AuthenticationService } from './services/authentication.service'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ChatService } from './services/chat.service';
   ],
   providers: [
     UserService,
-    ChatService
+    ChatService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

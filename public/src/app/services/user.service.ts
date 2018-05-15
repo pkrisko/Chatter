@@ -9,7 +9,6 @@ export class UserService {
 
   // Attempt to register a new user
   register(user, cb) {
-    console.log(user);
     this._http.post("/register", user) 
     .subscribe(data=>cb(data)); 
   }
