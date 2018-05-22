@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-log',
@@ -9,35 +11,50 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginLogComponent implements OnInit {
 
-  private user : Object;
+  private user =  {
+    email: "",
+    password: "",
+  };
   private errors : Array<String>;
+  private credentials: TokenPayload = {
+    email: '',
+    password: ''
+  };
+
 
   constructor(
-    private _userService : UserService
+    private _userService : UserService,
+    private _authService : AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.errors = new Array<String>();
-    this.user = {
-      email: "",
-      password: "",
-    };
   }
 
   login() {
+    this.credentials.email = this.user.email;
+    this.credentials.password = this.user.password;
+
     // Pass form data to userService, to attempt login.
-    this._userService.login(this.user, (status=>{
-      if (status.errors) {
-        console.log("ERRORS");
-        // If there are errors, add to errors array to view on page.
-        for (var error in status.errors) {
-          this.errors.push(status.errors[error].message);
-        }
-        console.log(this.errors);
-      } else { // success
-        console.log(status);
-      }
-    }));
+    this._authService.login(this.credentials).subscribe(() => {
+      console.log(this.credentials);
+      this.router.navigateByUrl('/home');
+    }, (err) => {
+      console.error(err);
+    });
+    // this._userService.login(this.user, (status=>{
+    //   if (status.errors) {
+    //     console.log("ERRORS");
+    //     // If there are errors, add to errors array to view on page.
+    //     for (var error in status.errors) {
+    //       this.errors.push(status.errors[error].message);
+    //     }
+    //     console.log(this.errors);
+    //   } else { // success
+    //     console.log(status);
+    //   }
+    // }));
   }
 
 }
